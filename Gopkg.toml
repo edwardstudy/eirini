@@ -32,3 +32,8 @@
 [[constraint]]
   name = "github.com/onsi/gomega"
   version = "1.2.0"
+
+[[constraint]]
+  name = "github.com/julz/knife"
+  branch = "wip-extend"
+  source = "github.com/jszroberto/knife"

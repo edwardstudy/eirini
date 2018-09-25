@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -eo pipefail
+
+cd $(dirname "${BASH_SOURCE[0]}")/..
+
+stack=$1
+if [[ ! -f ${stack}.json ]]; then
+  >&2 echo "No such stack: ${stack}"
+  exit 1
+fi
+
+GOOS=linux CGO_ENABLED=0 go build -a -installsuffix static -o images/build/builder github.com/sclevine/packs/cf/builder
+GOOS=linux CGO_ENABLED=0 go build -a -installsuffix static -o images/run/launcher github.com/sclevine/packs/cf/launcher
+GOOS=linux CGO_ENABLED=0 go build -a -installsuffix static -o images/run/shell github.com/sclevine/packs/cf/shell
+
+docker pull "cloudfoundry/${stack}"
+
+docker build --build-arg "stack=${stack}" -t "packs/${stack}:latest" images/base
+docker build --build-arg "stack=${stack}" --build-arg buildpacks="$(<"${stack}.json")" -t "packs/${stack}:build" images/build
+docker build --build-arg "stack=${stack}" -t "packs/${stack}:run" images/run
+docker build --build-arg "stack=${stack}" -t "packs/${stack}:export" images/export
+docker build --build-arg "stack=${stack}" -t "packs/${stack}:export-gcr" images/export-gcr
+docker build --build-arg "stack=${stack}" -t "packs/${stack}:network" images/network
+
+docker build --build-arg "stack=${stack}" -t "packs/${stack}-test" images/test

@@ -65,6 +65,7 @@ type Properties struct {
 	EiriniAddress      string `yaml:"eirini_address"`
 	SkipSslValidation  bool   `yaml:"skip_ssl_validation"`
 	InsecureSkipVerify bool   `yaml:"insecure_skip_verify"`
+	UseKnative         bool   `yaml:"use_knative"`
 }
 
 //go:generate counterfeiter . RemoveCallbackFunc

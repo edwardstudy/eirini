@@ -24,7 +24,6 @@ const (
 )
 
 var _ = Describe("Statefulset", func() {
-
 	var (
 		err                   error
 		client                kubernetes.Interface
@@ -128,7 +127,6 @@ var _ = Describe("Statefulset", func() {
 	})
 
 	Context("When getting an app", func() {
-
 		var lrp *opi.LRP
 
 		BeforeEach(func() {

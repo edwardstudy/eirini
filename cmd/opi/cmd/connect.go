@@ -14,6 +14,8 @@ import (
 
 	"code.cloudfoundry.org/eirini"
 	"code.cloudfoundry.org/eirini/handler"
+	"code.cloudfoundry.org/eirini/knative"
+	"code.cloudfoundry.org/eirini/opi"
 	"code.cloudfoundry.org/eirini/route"
 	"code.cloudfoundry.org/eirini/stager"
 	"code.cloudfoundry.org/lager"
@@ -23,6 +25,7 @@ import (
 	"code.cloudfoundry.org/eirini/bifrost"
 	"code.cloudfoundry.org/eirini/k8s"
 	"github.com/JulzDiverse/cfclient"
+	servingclientset "github.com/knative/serving/pkg/client/clientset/versioned"
 	nats "github.com/nats-io/go-nats"
 	"github.com/spf13/cobra"
 
@@ -54,6 +57,7 @@ func connect(cmd *cobra.Command, args []string) {
 		cfg.Properties.KubeNamespace,
 		cfg.Properties.NatsPassword,
 		cfg.Properties.NatsIP,
+		cfg.Properties.UseKnative,
 		workChan,
 	)
 
@@ -108,7 +112,12 @@ func initBifrost(cfg *eirini.Config, workChan chan []*eirini.Routes) eirini.Bifr
 	kubeNamespace := cfg.Properties.KubeNamespace
 
 	clientset := createKubeClient(cfg)
-	desirer := k8s.NewDesirer(kubeNamespace, clientset, k8s.UseStatefulSets, workChan)
+	var desirer opi.Desirer
+	if cfg.Properties.UseKnative {
+		desirer = knative.NewDesirer(kubeNamespace, clientset, createServingClient(cfg), workChan)
+	} else {
+		desirer = k8s.NewDesirer(kubeNamespace, clientset, k8s.UseStatefulSets, workChan)
+	}
 
 	convertLogger := lager.NewLogger("convert")
 	convertLogger.RegisterSink(lager.NewWriterSink(os.Stdout, lager.DEBUG))
@@ -132,6 +141,17 @@ func createKubeClient(cfg *eirini.Config) kubernetes.Interface {
 	return clientset
 }
 
+// FIXME - Reading again the file is inefficient, but let's keep it like that to avoid more merge conflicts
+func createServingClient(cfg *eirini.Config) servingclientset.Interface {
+	config, err := clientcmd.BuildConfigFromFlags("", cfg.Properties.KubeConfig)
+	exitWithError(err)
+
+	servingClient, err := servingclientset.NewForConfig(config)
+	exitWithError(err)
+
+	return servingClient
+}
+
 func setConfigFromFile(path string) *eirini.Config {
 	fileBytes, err := ioutil.ReadFile(path)
 	exitWithError(err)
@@ -147,7 +167,7 @@ func initConnect() {
 	connectCmd.Flags().StringP("config", "c", "", "Path to the erini config file")
 }
 
-func launchRouteEmitter(kubeConf, kubeEndpoint, namespace, natsPassword, natsIP string, workChan chan []*eirini.Routes) {
+func launchRouteEmitter(kubeConf, kubeEndpoint, namespace, natsPassword, natsIP string, useKnative bool, workChan chan []*eirini.Routes) {
 	nc, err := nats.Connect(fmt.Sprintf("nats://nats:%s@%s:4222", natsPassword, natsIP))
 	exitWithError(err)
 
@@ -156,7 +176,15 @@ func launchRouteEmitter(kubeConf, kubeEndpoint, namespace, natsPassword, natsIP 
 
 	clientset, err := kubernetes.NewForConfig(config)
 	exitWithError(err)
-	lister := k8s.NewServiceRouteLister(clientset, namespace)
+
+	var lister route.Lister
+	if useKnative {
+		servingClient, err := servingclientset.NewForConfig(config)
+		exitWithError(err)
+		lister = knative.NewServiceRouteLister(servingClient, namespace)
+	} else {
+		lister = k8s.NewServiceRouteLister(clientset, namespace)
+	}
 
 	rc := route.Collector{
 		RouteLister: lister,
