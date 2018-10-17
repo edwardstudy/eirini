@@ -68,8 +68,12 @@ func (m *replicaSetGetter) services() v1alpha1types.ServiceInterface {
 func (m *replicaSetGetter) serviceToLRP(s *v1alpha1.Service) (*opi.LRP, error) {
 	cenv := s.Spec.RunLatest.Configuration.RevisionTemplate.Spec.Container.Env
 	env := make(map[string]string)
+	filteredVars := map[string]bool{"POD_NAME": true}
+
 	for _, v := range cenv {
-		env[v.Name] = v.Value
+		if !filteredVars[v.Name] {
+			env[v.Name] = v.Value
+		}
 	}
 
 	lrp := &opi.LRP{

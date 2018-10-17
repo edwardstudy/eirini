@@ -40,8 +40,18 @@ func createLRP(processGUID, lastUpdated, routes string) *opi.LRP {
 
 // FIXME - This function implements exactly the same as the source code. Implementing something twice to test it is suboptimal. Equivalent function can be found in k8s package
 func toService(lrp *opi.LRP, namespace string) *v1alpha1.Service {
+	envs := MapToEnvVar(lrp.Env)
+	envs = append(envs, v1.EnvVar{
+		Name: "POD_NAME",
+		ValueFrom: &v1.EnvVarSource{
+			FieldRef: &v1.ObjectFieldSelector{
+				FieldPath: "metadata.name",
+			},
+		},
+	})
+
 	service := knife.NewRunLatestService(eirini.GetInternalServiceName(lrp.Name),
-		knife.WithRevisionTemplate(lrp.Image, lrp.Command, lrp.Env),
+		withRevisionTemplate(lrp.Image, lrp.Command, envs),
 	)
 
 	service.Namespace = namespace
@@ -59,6 +69,14 @@ func toService(lrp *opi.LRP, namespace string) *v1alpha1.Service {
 	}
 
 	return service
+}
+
+func withRevisionTemplate(image string, args []string, env []v1.EnvVar) knife.ConfigurationOption {
+	return func(t *v1alpha1.ConfigurationSpec) {
+		t.RevisionTemplate.Spec.Container.Image = image
+		t.RevisionTemplate.Spec.Container.Args = args
+		t.RevisionTemplate.Spec.Container.Env = env
+	}
 }
 
 func MapToEnvVar(env map[string]string) []v1.EnvVar {

@@ -10,6 +10,7 @@ import (
 	"code.cloudfoundry.org/eirini/opi"
 	"github.com/knative/serving/pkg/apis/serving/v1alpha1"
 	servingclientset "github.com/knative/serving/pkg/client/clientset/versioned"
+	"k8s.io/api/core/v1"
 	meta_v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	knife "github.com/julz/knife/pkg/knative"
@@ -125,8 +126,18 @@ func (m *serviceManager) Delete(appName string) error {
 }
 
 func toService(lrp *opi.LRP) *v1alpha1.Service {
+	envs := mapToEnvVar(lrp.Env)
+	envs = append(envs, v1.EnvVar{
+		Name: "POD_NAME",
+		ValueFrom: &v1.EnvVarSource{
+			FieldRef: &v1.ObjectFieldSelector{
+				FieldPath: "metadata.name",
+			},
+		},
+	})
+
 	service := knife.NewRunLatestService(eirini.GetInternalServiceName(lrp.Name),
-		knife.WithRevisionTemplate(lrp.Image, lrp.Command, lrp.Env),
+		withRevisionTemplate(lrp.Image, lrp.Command, envs),
 	)
 
 	service.Labels = map[string]string{
@@ -143,6 +154,24 @@ func toService(lrp *opi.LRP) *v1alpha1.Service {
 	}
 
 	return service
+}
+
+// TODO - Move to knife
+func withRevisionTemplate(image string, args []string, env []v1.EnvVar) knife.ConfigurationOption {
+	return func(t *v1alpha1.ConfigurationSpec) {
+		t.RevisionTemplate.Spec.Container.Image = image
+		t.RevisionTemplate.Spec.Container.Args = args
+		t.RevisionTemplate.Spec.Container.Env = env
+	}
+}
+
+func mapToEnvVar(env map[string]string) []v1.EnvVar {
+	envVars := []v1.EnvVar{}
+	for k, v := range env {
+		envVar := v1.EnvVar{Name: k, Value: v}
+		envVars = append(envVars, envVar)
+	}
+	return envVars
 }
 
 func getUnregisteredRoutes(existing, updated []string) []string {
