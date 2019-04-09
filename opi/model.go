@@ -71,6 +71,13 @@ type Task struct {
 	Env     map[string]string
 }
 
+type StagingTask struct {
+	*Task
+	DownloaderImage string
+	UploaderImage   string
+	ExecutorImage   string
+}
+
 //go:generate counterfeiter . Desirer
 type Desirer interface {
 	Desire(lrp *LRP) error
@@ -84,6 +91,6 @@ type Desirer interface {
 //go:generate counterfeiter . TaskDesirer
 type TaskDesirer interface {
 	Desire(task *Task) error
-	DesireStaging(task *Task) error
+	DesireStaging(task *StagingTask) error
 	Delete(name string) error
 }

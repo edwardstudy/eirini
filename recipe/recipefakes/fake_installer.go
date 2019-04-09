@@ -8,13 +8,10 @@ import (
 )
 
 type FakeInstaller struct {
-	InstallStub        func(appID, targetDir string) error
+	InstallStub        func() error
 	installMutex       sync.RWMutex
-	installArgsForCall []struct {
-		appID     string
-		targetDir string
-	}
-	installReturns struct {
+	installArgsForCall []struct{}
+	installReturns     struct {
 		result1 error
 	}
 	installReturnsOnCall map[int]struct {
@@ -24,17 +21,14 @@ type FakeInstaller struct {
 	invocationsMutex sync.RWMutex
 }
 
-func (fake *FakeInstaller) Install(appID string, targetDir string) error {
+func (fake *FakeInstaller) Install() error {
 	fake.installMutex.Lock()
 	ret, specificReturn := fake.installReturnsOnCall[len(fake.installArgsForCall)]
-	fake.installArgsForCall = append(fake.installArgsForCall, struct {
-		appID     string
-		targetDir string
-	}{appID, targetDir})
-	fake.recordInvocation("Install", []interface{}{appID, targetDir})
+	fake.installArgsForCall = append(fake.installArgsForCall, struct{}{})
+	fake.recordInvocation("Install", []interface{}{})
 	fake.installMutex.Unlock()
 	if fake.InstallStub != nil {
-		return fake.InstallStub(appID, targetDir)
+		return fake.InstallStub()
 	}
 	if specificReturn {
 		return ret.result1
@@ -46,12 +40,6 @@ func (fake *FakeInstaller) InstallCallCount() int {
 	fake.installMutex.RLock()
 	defer fake.installMutex.RUnlock()
 	return len(fake.installArgsForCall)
-}
-
-func (fake *FakeInstaller) InstallArgsForCall(i int) (string, string) {
-	fake.installMutex.RLock()
-	defer fake.installMutex.RUnlock()
-	return fake.installArgsForCall[i].appID, fake.installArgsForCall[i].targetDir
 }
 
 func (fake *FakeInstaller) InstallReturns(result1 error) {
