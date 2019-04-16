@@ -23,54 +23,6 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:3bbc8a2ff6dc55c420ff6f371d497635e1a0ec23ceb20fb8da92788db86986af"
-  name = "code.cloudfoundry.org/buildpackapplifecycle"
-  packages = ["."]
-  pruneopts = ""
-  revision = "928cda2ee7d6cb476865e1a79a98807f67bae882"
-
-[[projects]]
-  branch = "master"
-  digest = "1:23ea7327e52e14b2b0eff80a8a4b9fa522922079e5afa4b969b8ca0ad182c3a1"
-  name = "code.cloudfoundry.org/bytefmt"
-  packages = ["."]
-  pruneopts = ""
-  revision = "2aa6f33b730c79971cfc3c742f279195b0abc627"
-
-[[projects]]
-  digest = "1:46fec7599d3a19674f1f79c04f209c9230066c3edf4f7b7295d8fc300d33df1a"
-  name = "code.cloudfoundry.org/cli"
-  packages = [
-    "actor/actionerror",
-    "api/cloudcontroller/ccerror",
-    "api/cloudcontroller/ccv2/constant",
-    "api/plugin/pluginerror",
-    "api/uaa",
-    "api/uaa/constant",
-    "api/uaa/internal",
-    "cf/appfiles",
-    "cf/errors",
-    "cf/formatters",
-    "cf/i18n",
-    "cf/models",
-    "cf/util/glob",
-    "command/translatableerror",
-    "i18n/resources",
-    "types",
-    "util",
-    "util/clissh/ssherror",
-    "util/configv3",
-    "util/download",
-    "util/manifest",
-    "util/ui",
-    "version",
-  ]
-  pruneopts = ""
-  revision = "4947847c552d8aa967d3ad9ed720d74d42f674d3"
-  version = "v6.42.0"
-
-[[projects]]
-  branch = "master"
   digest = "1:f320951b97c5f1ef4c4ab5e85d34dcaf0ed05761837f64ecc109db895f751e80"
   name = "code.cloudfoundry.org/go-diodes"
   packages = ["."]
@@ -87,14 +39,6 @@
   pruneopts = ""
   revision = "7eacadc7c6c75fbf98bf9ed618e7d88fbb67ea44"
   version = "v7.2.0"
-
-[[projects]]
-  branch = "master"
-  digest = "1:458a7743018a51b622fac1a2c19f351673966b1a227586bc820d7c01a2c24f27"
-  name = "code.cloudfoundry.org/gofileutils"
-  packages = ["fileutils"]
-  pruneopts = ""
-  revision = "4d0c80011a0f37da1711c184028bc40137cd45af"
 
 [[projects]]
   digest = "1:673cab9bb26a0011fbc34255ec4a6695ecb31cf6338860263959c415e3aa3dd1"
@@ -126,14 +70,6 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:d55ad38b832eccf975b872c1a37bc1fc253d4e3b190c750d1bab06cc8b5b85ac"
-  name = "code.cloudfoundry.org/tlsconfig"
-  packages = ["."]
-  pruneopts = ""
-  revision = "07274a700fb4c760fba249bb06f682a8c08ef202"
-
-[[projects]]
-  branch = "master"
   digest = "1:50d6e579ed67b416c3cfdefa804675853686e4c67a38d2df19b45340b3665028"
   name = "code.cloudfoundry.org/tps"
   packages = ["cc_client"]
@@ -147,100 +83,6 @@
   packages = ["."]
   pruneopts = ""
   revision = "5cabba6c0a5085a9d07c2c54e01df65c6122e450"
-
-[[projects]]
-  digest = "1:c7937d6337f88193ad8aade88c92d7e72b3d5fc6e5002a9515dabca5802624cd"
-  name = "github.com/Microsoft/go-winio"
-  packages = ["."]
-  pruneopts = ""
-  revision = "97e4973ce50b2ff5f09635a57e2b88a037aae829"
-  version = "v0.4.11"
-
-[[projects]]
-  digest = "1:8855efc2aff3afd6319da41b22a8ca1cfd1698af05a24852c01636ba65b133f0"
-  name = "github.com/SermoDigital/jose"
-  packages = [
-    ".",
-    "crypto",
-    "jws",
-    "jwt",
-  ]
-  pruneopts = ""
-  revision = "f6df55f235c24f236d11dbcf665249a59ac2021f"
-  version = "1.1"
-
-[[projects]]
-  digest = "1:79421244ba5848aae4b0a5c41e633a04e4894cb0b164a219dc8c15ec7facb7f1"
-  name = "github.com/blang/semver"
-  packages = ["."]
-  pruneopts = ""
-  revision = "2ee87856327ba09384cabd113bc6b5d174e9ec0f"
-  version = "v3.5.1"
-
-[[projects]]
-  digest = "1:d0cc4a5bd7f183727fa68f58cb969413aaf6cbb8824c36b4fdbd729a4e98c937"
-  name = "github.com/bmatcuk/doublestar"
-  packages = ["."]
-  pruneopts = ""
-  revision = "85a78806aa1b4707d1dbace9be592cf1ece91ab3"
-  version = "v1.1.1"
-
-[[projects]]
-  branch = "add_tests_for_img"
-  digest = "1:df9d20817e766a31bd52bf029fc88e4421cba51a6eb39aaa9de42e1233dd9b5b"
-  name = "github.com/buildpack/packs"
-  packages = [
-    ".",
-    "cf",
-    "heroku/app",
-    "img",
-  ]
-  pruneopts = ""
-  revision = "a109d270e3ecc4c737b0ca8ec7a92c573cfbd91f"
-
-[[projects]]
-  branch = "master"
-  digest = "1:94c865fcab9201eee1bd7bf9423ca056f982871264332c669fcf2e25bb2392cb"
-  name = "github.com/charlievieth/fs"
-  packages = ["."]
-  pruneopts = ""
-  revision = "7dc373669fa10ddf827c37c595dee30a2f001be9"
-
-[[projects]]
-  digest = "1:fa19a17599e0ff0ca7b00a53377fcd3933593255708b9fe275accbbf165cb066"
-  name = "github.com/cloudfoundry/bosh-cli"
-  packages = ["director/template"]
-  pruneopts = ""
-  revision = "712bfd7271b478ba03c3f604339e2eefbec4647c"
-  version = "v3.0.1"
-
-[[projects]]
-  branch = "master"
-  digest = "1:700e508ad57c2e785c06c3d2e2d341e475634369cf5c0b7a2cffe5982659f451"
-  name = "github.com/cloudfoundry/bosh-utils"
-  packages = [
-    "errors",
-    "logger",
-    "system",
-  ]
-  pruneopts = ""
-  revision = "c2cf699102bd7878141b9810117cba777852f1be"
-
-[[projects]]
-  digest = "1:2b508b111ea77918c2c49dd6e3d8286100b7c84a77e9504f89806bd3cb567dee"
-  name = "github.com/cppforlife/go-patch"
-  packages = ["patch"]
-  pruneopts = ""
-  revision = "90228d47281247384683e5fded0f15afa3e5d29a"
-  version = "v0.2.0"
-
-[[projects]]
-  digest = "1:a9854984bc40330dde2125537b7f46d0a8d7860b3750de2e7cd0a6f904506212"
-  name = "github.com/cyphar/filepath-securejoin"
-  packages = ["."]
-  pruneopts = ""
-  revision = "a261ee33d7a517f054effbf451841abaafe3e0fd"
-  version = "v0.2.2"
 
 [[projects]]
   digest = "1:0deddd908b6b4b768cfc272c16ee61e7088a60f7fe2f06c547bd3d8e1f8b8e77"
@@ -259,76 +101,12 @@
   version = "v1.7.1"
 
 [[projects]]
-  digest = "1:c05f1899f086e3b4613d94d9e6f7ba6f4b6587498a1aa6037c5c294b22f5a743"
-  name = "github.com/docker/distribution"
-  packages = [
-    "digestset",
-    "reference",
-  ]
-  pruneopts = ""
-  revision = "2461543d988979529609e8cb6fca9ca190dc48da"
-  version = "v2.7.1"
-
-[[projects]]
-  digest = "1:4da26b62f5ae4be71f79b0c8b7563599e951356af509c60125e63cb4246396ad"
-  name = "github.com/docker/docker"
-  packages = [
-    "api",
-    "api/types",
-    "api/types/blkiodev",
-    "api/types/container",
-    "api/types/events",
-    "api/types/filters",
-    "api/types/image",
-    "api/types/mount",
-    "api/types/network",
-    "api/types/registry",
-    "api/types/strslice",
-    "api/types/swarm",
-    "api/types/swarm/runtime",
-    "api/types/time",
-    "api/types/versions",
-    "api/types/volume",
-    "client",
-  ]
-  pruneopts = ""
-  revision = "71cd53e4a197b303c6ba086bd584ffd67a884281"
-
-[[projects]]
-  digest = "1:ebe593d8b65a2947b78b6e164a2dac1a230b977a700b694da3a398b03b7afb04"
-  name = "github.com/docker/go-connections"
-  packages = [
-    "nat",
-    "sockets",
-    "tlsconfig",
-  ]
-  pruneopts = ""
-  revision = "7395e3f8aa162843a74ed6d48e79627d9792ac55"
-  version = "v0.4.0"
-
-[[projects]]
-  digest = "1:582d54fcb7233da8dde1dfd2210a5b9675d0685f84246a8d317b07d680c18b1b"
-  name = "github.com/docker/go-units"
-  packages = ["."]
-  pruneopts = ""
-  revision = "47565b4f722fb6ceae66b95f853feed578a4a51c"
-  version = "v0.3.3"
-
-[[projects]]
   digest = "1:4216202f4088a73e2982df875e2f0d1401137bbc248e57391e70547af167a18a"
   name = "github.com/evanphx/json-patch"
   packages = ["."]
   pruneopts = ""
   revision = "72bf35d0ff611848c1dc9df0f976c81192392fa5"
   version = "v4.1.0"
-
-[[projects]]
-  branch = "master"
-  digest = "1:eeba285fdc8e024e3305d5efd2a85e9e46097172873f9c841ae575527e6affbe"
-  name = "github.com/fatih/color"
-  packages = ["."]
-  pruneopts = ""
-  revision = "3f9d52f7176a6927daacff70a3e8d1dc2025c53e"
 
 [[projects]]
   digest = "1:527e1e468c5586ef2645d143e9f5fbd50b4fe5abc8b1e25d9f1c416d22d24895"
@@ -368,29 +146,6 @@
   packages = ["."]
   pruneopts = ""
   revision = "4030bb1f1f0c35b30ca7009e9ebd06849dd45306"
-
-[[projects]]
-  branch = "master"
-  digest = "1:bf3820b18df8f76e807855f472b62b761e75b7ec12c317ae7691ca1890bb26c4"
-  name = "github.com/google/go-containerregistry"
-  packages = [
-    "pkg/authn",
-    "pkg/name",
-    "pkg/v1",
-    "pkg/v1/daemon",
-    "pkg/v1/empty",
-    "pkg/v1/mutate",
-    "pkg/v1/partial",
-    "pkg/v1/random",
-    "pkg/v1/remote",
-    "pkg/v1/remote/transport",
-    "pkg/v1/stream",
-    "pkg/v1/tarball",
-    "pkg/v1/types",
-    "pkg/v1/v1util",
-  ]
-  pruneopts = ""
-  revision = "1496eb6b0470a163639aaff730c61247df8ec0be"
 
 [[projects]]
   branch = "master"
@@ -481,46 +236,6 @@
   version = "v1.2.0"
 
 [[projects]]
-  digest = "1:6a874e3ddfb9db2b42bd8c85b6875407c702fa868eed20634ff489bc896ccfd3"
-  name = "github.com/konsorten/go-windows-terminal-sequences"
-  packages = ["."]
-  pruneopts = ""
-  revision = "5c8c8bd35d3832f5d134ae1e1e375b69a4d25242"
-  version = "v1.0.1"
-
-[[projects]]
-  branch = "master"
-  digest = "1:a1df2b8580d14ed39468ed683fa344ef2ebabd77eccb45cbad057b30181bb6c0"
-  name = "github.com/lunixbochs/vtclean"
-  packages = ["."]
-  pruneopts = ""
-  revision = "2d01aacdc34a083dca635ba869909f5fc0cd4f41"
-
-[[projects]]
-  digest = "1:9ea83adf8e96d6304f394d40436f2eb44c1dc3250d223b74088cc253a6cd0a1c"
-  name = "github.com/mattn/go-colorable"
-  packages = ["."]
-  pruneopts = ""
-  revision = "167de6bfdfba052fa6b2d3664c8f5272e23c9072"
-  version = "v0.0.9"
-
-[[projects]]
-  digest = "1:3140e04675a6a91d2a20ea9d10bdadf6072085502e6def6768361260aee4b967"
-  name = "github.com/mattn/go-isatty"
-  packages = ["."]
-  pruneopts = ""
-  revision = "6ca4dbf54d38eea1a992b3c722a76a5d1c4cb25c"
-  version = "v0.0.4"
-
-[[projects]]
-  branch = "master"
-  digest = "1:9ee32ea3a8acd51346391ae253ed42526069669b8a9a60b00e68e09d21a4b563"
-  name = "github.com/mattn/go-runewidth"
-  packages = ["."]
-  pruneopts = ""
-  revision = "703b5e6b11ae25aeb2af9ebb5d5fdf8fa2575211"
-
-[[projects]]
   digest = "1:0c0ff2a89c1bb0d01887e1dac043ad7efbf3ec77482ef058ac423d13497e16fd"
   name = "github.com/modern-go/concurrent"
   packages = ["."]
@@ -598,7 +313,6 @@
     ".",
     "format",
     "gbytes",
-    "gexec",
     "ghttp",
     "gstruct",
     "gstruct/errors",
@@ -616,25 +330,6 @@
   pruneopts = ""
   revision = "65fb64232476ad9046e57c26cd0bff3d3a8dc6cd"
   version = "v1.4.3"
-
-[[projects]]
-  digest = "1:5d9b668b0b4581a978f07e7d2e3314af18eb27b3fb5d19b70185b7c575723d11"
-  name = "github.com/opencontainers/go-digest"
-  packages = ["."]
-  pruneopts = ""
-  revision = "279bed98673dd5bef374d3b6e4b09e2af76183bf"
-  version = "v1.0.0-rc1"
-
-[[projects]]
-  digest = "1:f26c8670b11e29a49c8e45f7ec7f2d5bac62e8fd4e3c0ae1662baa4a697f984a"
-  name = "github.com/opencontainers/image-spec"
-  packages = [
-    "specs-go",
-    "specs-go/v1",
-  ]
-  pruneopts = ""
-  revision = "d60099175f88c47cd379c4738d158884749ed235"
-  version = "v1.0.1"
 
 [[projects]]
   branch = "master"
@@ -661,22 +356,6 @@
   version = "v0.8.1"
 
 [[projects]]
-  digest = "1:e8a9c13aafa206fa29b9015213c2312cc97a6e33c44f17be34d4029a8d94585d"
-  name = "github.com/sclevine/spec"
-  packages = ["."]
-  pruneopts = ""
-  revision = "b518b20aa1af75d314a31c9b3acfeeab7c4cbfb4"
-  version = "v1.2.0"
-
-[[projects]]
-  digest = "1:9a3c631555e0351fdc4e696577bb63afd90c399d782a8462dba9d100d7021db3"
-  name = "github.com/sirupsen/logrus"
-  packages = ["."]
-  pruneopts = ""
-  revision = "e1e72e9de974bd926e5c56f83753fba2df402ce5"
-  version = "v1.3.0"
-
-[[projects]]
   digest = "1:a1403cc8a94b8d7956ee5e9694badef0e7b051af289caad1cf668331e3ffa4f6"
   name = "github.com/spf13/cobra"
   packages = ["."]
@@ -691,17 +370,6 @@
   pruneopts = ""
   revision = "298182f68c66c05229eb03ac171abe6e309ee79a"
   version = "v1.0.3"
-
-[[projects]]
-  branch = "master"
-  digest = "1:4de6ae63e66731f7112372a9256049df9b95035bf8a350e34116af6cd32e5fac"
-  name = "github.com/vito/go-interact"
-  packages = [
-    "interact",
-    "interact/terminal",
-  ]
-  pruneopts = ""
-  revision = "fa338ed9e9ecbb0e9c2e6c7a0160d9fc9b0efbd9"
 
 [[projects]]
   branch = "master"
@@ -729,9 +397,7 @@
     "http2",
     "http2/hpack",
     "idna",
-    "internal/socks",
     "internal/timeseries",
-    "proxy",
     "trace",
   ]
   pruneopts = ""
@@ -750,14 +416,6 @@
   ]
   pruneopts = ""
   revision = "99b60b757ec124ebb7d6b7e97f153b19c10ce163"
-
-[[projects]]
-  branch = "master"
-  digest = "1:814474ab808c5e04b9334d046f8a0060fc1724c2c02acfd00a7cc0008d675455"
-  name = "golang.org/x/sync"
-  packages = ["errgroup"]
-  pruneopts = ""
-  revision = "37e7f081c4d4c64e13b10787722085407fe5d15f"
 
 [[projects]]
   branch = "master"
@@ -881,14 +539,6 @@
   pruneopts = ""
   revision = "a02b0774206b209466313a0b525d2c738fe407eb"
   version = "v1.18.0"
-
-[[projects]]
-  digest = "1:7ee36a5034431ac76a6afd7618b33e86de5e9907e52e1ca5c7850c318d52e2b8"
-  name = "gopkg.in/cheggaaa/pb.v1"
-  packages = ["."]
-  pruneopts = ""
-  revision = "1cc5bbe20449079337944d56292c7383510c534c"
-  version = "v1.0.27"
 
 [[projects]]
   digest = "1:eb53021a8aa3f599d29c7102e65026242bdedce998a54837dc67f14b6a97c5fd"
@@ -1235,37 +885,21 @@
   analyzer-version = 1
   input-imports = [
     "code.cloudfoundry.org/bbs/models",
-    "code.cloudfoundry.org/buildpackapplifecycle",
-    "code.cloudfoundry.org/cli/cf/appfiles",
     "code.cloudfoundry.org/go-loggregator",
     "code.cloudfoundry.org/lager",
     "code.cloudfoundry.org/lager/lagerctx",
     "code.cloudfoundry.org/lager/lagertest",
     "code.cloudfoundry.org/runtimeschema/cc_messages",
-    "code.cloudfoundry.org/tlsconfig",
     "code.cloudfoundry.org/tps/cc_client",
-    "github.com/buildpack/packs",
-    "github.com/buildpack/packs/cf",
-    "github.com/buildpack/packs/heroku/app",
-    "github.com/buildpack/packs/img",
     "github.com/deckarep/golang-set",
     "github.com/gogo/protobuf/jsonpb",
-    "github.com/google/go-containerregistry/pkg/authn",
-    "github.com/google/go-containerregistry/pkg/name",
-    "github.com/google/go-containerregistry/pkg/v1",
-    "github.com/google/go-containerregistry/pkg/v1/daemon",
-    "github.com/google/go-containerregistry/pkg/v1/mutate",
-    "github.com/google/go-containerregistry/pkg/v1/remote",
-    "github.com/google/go-containerregistry/pkg/v1/tarball",
     "github.com/julienschmidt/httprouter",
     "github.com/nats-io/go-nats",
     "github.com/onsi/ginkgo",
     "github.com/onsi/gomega",
-    "github.com/onsi/gomega/gexec",
     "github.com/onsi/gomega/ghttp",
     "github.com/onsi/gomega/gstruct",
     "github.com/pkg/errors",
-    "github.com/sclevine/spec",
     "github.com/spf13/cobra",
     "gopkg.in/yaml.v2",
     "k8s.io/api/apps/v1",
