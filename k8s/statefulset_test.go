@@ -12,6 +12,7 @@ import (
 	"code.cloudfoundry.org/eirini/k8s/k8sfakes"
 	"code.cloudfoundry.org/eirini/models/cf"
 	"code.cloudfoundry.org/eirini/opi"
+	"code.cloudfoundry.org/eirini/rootfspatcher"
 	"code.cloudfoundry.org/eirini/util"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -40,6 +41,7 @@ var _ = Describe("Statefulset", func() {
 		statefulSetDesirer    opi.Desirer
 		livenessProbeCreator  *k8sfakes.FakeProbeCreator
 		readinessProbeCreator *k8sfakes.FakeProbeCreator
+		rootfsVersion         string
 	)
 
 	listStatefulSets := func() []v1beta2.StatefulSet {
@@ -60,12 +62,14 @@ var _ = Describe("Statefulset", func() {
 
 		livenessProbeCreator = new(k8sfakes.FakeProbeCreator)
 		readinessProbeCreator = new(k8sfakes.FakeProbeCreator)
+		rootfsVersion = "version1"
 	})
 
 	JustBeforeEach(func() {
 		statefulSetDesirer = &StatefulSetDesirer{
 			Client:                client,
 			Namespace:             namespace,
+			RootfsVersion:         rootfsVersion,
 			LivenessProbeCreator:  livenessProbeCreator.Spy,
 			ReadinessProbeCreator: readinessProbeCreator.Spy,
 		}
@@ -122,6 +126,12 @@ var _ = Describe("Statefulset", func() {
 			It("should set imagePullPolicy to Always", func() {
 				statefulSet := getStatefulSet(lrp)
 				Expect(string(statefulSet.Spec.Template.Spec.Containers[0].ImagePullPolicy)).To(Equal("Always"))
+			})
+
+			It("should set rootfsVersion as a label", func() {
+				statefulSet := getStatefulSet(lrp)
+				Expect(statefulSet.Labels).To(HaveKeyWithValue(rootfspatcher.RootfsVersionLabel, rootfsVersion))
+				Expect(statefulSet.Spec.Template.Labels).To(HaveKeyWithValue(rootfspatcher.RootfsVersionLabel, rootfsVersion))
 			})
 
 			Context("When redeploying an existing LRP", func() {
